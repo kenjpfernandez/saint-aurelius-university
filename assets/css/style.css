@@ -164,3 +164,166 @@ th, td {
 .hidden {
   display: none;
 }
+.portal-shell {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f4efe6 0%, #efe6d8 100%);
+  color: var(--ink);
+}
+
+.portal-topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 250, 241, 0.85);
+  backdrop-filter: blur(6px);
+}
+
+.portal-topbar h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.portal-subtitle {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.portal-userbox {
+  text-align: right;
+  color: var(--muted);
+}
+
+.portal-userbox strong {
+  display: block;
+  color: var(--ink);
+}
+
+.portal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--line);
+  background: #fffaf1;
+}
+
+.tab-btn {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.tab-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.tab-btn.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.portal-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 260px;
+  gap: 18px;
+  padding: 18px 28px 32px;
+}
+
+.portal-sidebar,
+.portal-cluebox,
+.portal-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.04);
+}
+
+.portal-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+}
+
+.portal-sidebar li {
+  padding: 8px 0;
+}
+
+.portal-sidebar a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.locked-item {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.sidebar-clue,
+.clue-card {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  background: rgba(255,255,255,0.7);
+  margin-top: 14px;
+}
+
+.portal-main {
+  min-height: 540px;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.dashboard-card {
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.dashboard-card h3 {
+  margin-bottom: 8px;
+}
+
+.locked-card {
+  opacity: 0.55;
+  filter: grayscale(1);
+}
+
+.portal-note {
+  margin-top: 18px;
+  color: var(--muted);
+}
+
+.hidden-clue {
+  display: none;
+}
+
+.hidden-clue.revealed {
+  display: block;
+}
