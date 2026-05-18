@@ -1,20 +1,40 @@
-<h1>SAU Student Access</h1>
-<p>Temporary credentials required.</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SAU Student Access</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <section class="panel">
+      <h1>SAU Student Access</h1>
+      <p>Temporary credentials required.</p>
 
-<label for="student-id">Student ID</label>
-<input id="student-id" type="text" placeholder="SAU-_____" />
+      <p class="hint">
+        Temporary access was issued under a restricted archive request.
+        Check the orientation clip closely.
+      </p>
 
-<label for="access-code">Access Code</label>
-<input id="access-code" type="password" placeholder="Enter code" />
+      <form data-login-form>
+        <label for="student-id">Student ID</label>
+        <input id="student-id" type="text" placeholder="SAU-_____" autocomplete="off" />
 
-<button id="loginBtn">Login</button>
+        <label for="access-code">Access Code</label>
+        <input id="access-code" type="password" placeholder="Enter code" autocomplete="off" />
 
-<p class="hint">
-  Temporary access was issued under a restricted archive request.
-  Check the orientation clip closely.
-</p>
+        <button type="submit">Login</button>
+      </form>
 
-<p class="error">Access denied. Unrecognized credentials.</p>
-<p class="success">Identity verified. Redirecting to student dashboard...</p>
+      <p class="system-note" data-status></p>
 
-<a href="../day1/portal.html">Enter Portal</a>
+      <p><a class="button secondary" href="../index.html">Back to Home</a></p>
+    </section>
+  </div>
+
+  <audio id="access-sfx" src="../assets/audio/access-denied.mp3"></audio>
+  <audio id="error-sfx" src="../assets/audio/access-denied.mp3"></audio>
+  <script src="../assets/js/game.js"></script>
+</body>
+</html>
