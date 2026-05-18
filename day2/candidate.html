@@ -1,1 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Candidate Files | SAU</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="day2-shell">
+  <div class="portal-shell">
+    <header class="portal-topbar">
+      <div>
+        <h1>Saint Aurelius University</h1>
+        <p class="portal-subtitle">Veritas Archive | Candidate Database</p>
+      </div>
+      <div class="portal-userbox">
+        <strong>Archive Viewer</strong>
+        <span>Candidate Sector</span>
+      </div>
+    </header>
 
+    <nav class="portal-nav">
+      <a class="tab-btn" href="archive.html">Archive</a>
+      <a class="tab-btn" href="yearbook.html">Yearbook</a>
+      <a class="tab-btn" href="evaluations.html">Evaluations</a>
+      <a class="tab-btn" href="ethics.html">Ethics</a>
+      <a class="tab-btn active locked" href="#">Council</a>
+    </nav>
+
+    <div class="portal-layout">
+      <aside class="portal-sidebar">
+        <h2>Archive Index</h2>
+        <ul>
+          <li><a href="archive.html">Sector Overview</a></li>
+          <li><a href="yearbook.html">Yearbook Scan</a></li>
+          <li><a href="evaluations.html">Student Evaluations</a></li>
+          <li><a href="ethics.html">Ethics Committee</a></li>
+          <li class="locked-item">Council Files</li>
+        </ul>
+
+        <div class="sidebar-clue">
+          <p><strong>Notice</strong></p>
+          <p>The Council does not select the smartest students. It selects the most controllable ones.</p>
+        </div>
+      </aside>
+
+      <main class="portal-main">
+        <section class="portal-panel">
+          <h2>Candidate Database</h2>
+
+          <div class="email">
+            <strong>Candidate Criteria</strong><br><br>
+            OBEDIENT<br>
+            RESILIENT<br>
+            ISOLATED<br>
+            DEPENDENT<br>
+            COMPLIANT
+          </div>
+
+          <div class="email">
+            <strong>Candidate Status:</strong> Elena Navarro<br>
+            <strong>Review Result:</strong> FAILED COMPLIANCE REVIEW
+          </div>
+
+          <p class="alert">
+            Elena resisted the protocol. That is why her records were erased.
+          </p>
+
+          <p class="matrix-note">
+            This file confirms the purpose of the program. The final page should reveal the project name.
+          </p>
+
+          <form data-code-form
+                data-answer="PROJECT ASCENSION"
+                data-target="finale.html"
+                data-success="Project name confirmed. Opening final archive file..."
+                data-fail="That was not the official project name.">
+            <label for="candidate-code">Enter project name</label>
+            <input id="candidate-code" type="text" placeholder="Project name" />
+            <button type="submit">Open Final File</button>
+          </form>
+
+          <p class="system-note" data-status></p>
+        </section>
+      </main>
+
+      <aside class="portal-cluebox">
+        <h2>Clue Drawer</h2>
+        <div class="clue-card">
+          <p><strong>Observation</strong></p>
+          <p class="clue-text">The final answer is a project title that appeared earlier in the archive.</p>
+        </div>
+        <div class="clue-card">
+          <p><strong>Hint</strong></p>
+          <p class="clue-text">The phrase comes from the ethics file and the committee rejection.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="../assets/js/game.js"></script>
+</body>
+</html>
