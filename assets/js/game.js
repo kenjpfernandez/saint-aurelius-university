@@ -9,15 +9,6 @@
     }
   };
 
-  const playSound = (id) => {
-    const audio = document.getElementById(id);
-    if (!audio) return;
-    audio.currentTime = 0;
-    audio.play().catch(() => {});
-  };
-
-  window.SAU = { unlock, playSound };
-
   const clueBtn = document.getElementById("revealClueBtn");
 if (clueBtn) {
   clueBtn.addEventListener("click", () => {
@@ -27,7 +18,15 @@ if (clueBtn) {
       sound.play().catch(() => {});
     }
   });
-}
+
+  const playSound = (id) => {
+    const audio = document.getElementById(id);
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  };
+
+  window.SAU = { unlock, playSound };
 
   // Login page
   const loginForm = document.querySelector("[data-login-form]");
