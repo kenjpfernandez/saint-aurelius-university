@@ -18,6 +18,17 @@
 
   window.SAU = { unlock, playSound };
 
+  const clueBtn = document.getElementById("revealClueBtn");
+if (clueBtn) {
+  clueBtn.addEventListener("click", () => {
+    const sound = document.getElementById("glitch-sfx");
+    if (sound) {
+      sound.currentTime = 0;
+      sound.play().catch(() => {});
+    }
+  });
+}
+
   // Login page
   const loginForm = document.querySelector("[data-login-form]");
   if (loginForm) {
