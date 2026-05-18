@@ -600,3 +600,16 @@ button:hover,
   color: #ffb1b1;
   margin-bottom: 10px;
 }
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.sau-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  display: block;
+}
