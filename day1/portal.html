@@ -1,15 +1,35 @@
-<h1>Student Dashboard</h1>
-<p>Welcome back, Elena Navarro.</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Student Dashboard</h1>
+      <p>Welcome back, Elena Navarro.</p>
+      <p class="system-note">
+        Some records may be delayed due to archive synchronization.
+      </p>
+    </section>
 
-<div class="module">Academic Schedule</div>
-<div class="module">Veritas Library</div>
-<div class="module">Mailbox</div>
-<div class="module locked">Disciplinary Records</div>
+    <div class="grid">
+      <a class="card button block" href="schedule.html">Academic Schedule</a>
+      <a class="card button block" href="library.html">Veritas Library</a>
+      <a class="card button block" href="email.html">Mailbox</a>
+      <div class="card module locked">Disciplinary Records</div>
+    </div>
 
-<p class="hidden-note">
-  If a file disappears, search the place where schedules and memories overlap.
-</p>
+    <section class="panel" style="margin-top:16px;">
+      <p class="hidden-note">
+        If a file disappears, search the place where schedules and memories overlap.
+      </p>
+    </section>
+  </div>
 
-<p class="system-note">
-  Some records may be delayed due to archive synchronization.
-</p>
+  <script src="../assets/js/game.js"></script>
+</body>
+</html>
