@@ -3,33 +3,159 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Student Dashboard</title>
+  <title>SAU Secure Academic Portal</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body>
-  <div class="wrap">
-    <section class="hero">
-      <h1>Student Dashboard</h1>
-      <p>Welcome back, Elena Navarro.</p>
-      <p class="system-note">
-        Some records may be delayed due to archive synchronization.
-      </p>
-    </section>
+  <div class="portal-shell">
+    <header class="portal-topbar">
+      <div>
+        <h1>Saint Aurelius University</h1>
+        <p class="portal-subtitle">Secure Academic Portal | Authorized Session Active</p>
+      </div>
 
-    <div class="grid">
-      <a class="card button block" href="schedule.html">Academic Schedule</a>
-      <a class="card button block" href="library.html">Veritas Library</a>
-      <a class="card button block" href="email.html">Mailbox</a>
-      <div class="card module locked">Disciplinary Records</div>
+      <div class="portal-userbox">
+        <strong>Elena Navarro</strong>
+        <span>College of Behavioral Sciences</span>
+      </div>
+    </header>
+
+    <nav class="portal-nav">
+      <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+      <button class="tab-btn" data-tab="schedule">Schedule</button>
+      <button class="tab-btn" data-tab="library">Veritas Library</button>
+      <button class="tab-btn" data-tab="mailbox">Mailbox</button>
+      <button class="tab-btn locked" data-tab="records">Disciplinary Records</button>
+    </nav>
+
+    <div class="portal-layout">
+      <aside class="portal-sidebar">
+        <h2>Quick Access</h2>
+        <ul>
+          <li><a href="schedule.html">Academic Schedule</a></li>
+          <li><a href="library.html">Library Catalog</a></li>
+          <li><a href="email.html">Mailbox</a></li>
+          <li class="locked-item">Ethics Office</li>
+          <li class="locked-item">Council Index</li>
+        </ul>
+
+        <div class="sidebar-clue">
+          <p><strong>System Notice</strong></p>
+          <p>
+            Archive syncing is incomplete.
+            Some records may appear twice.
+          </p>
+        </div>
+      </aside>
+
+      <main class="portal-main">
+        <section class="portal-panel tab-panel active" id="dashboard">
+          <h2>Dashboard Overview</h2>
+          <p>
+            Welcome back, Elena. Your account retains temporary access to public academic services.
+          </p>
+
+          <div class="dashboard-grid">
+            <a class="dashboard-card" href="schedule.html">
+              <h3>Academic Schedule</h3>
+              <p>Review today’s classes and consultation windows.</p>
+            </a>
+
+            <a class="dashboard-card" href="library.html">
+              <h3>Veritas Library</h3>
+              <p>Search archived theses and course references.</p>
+            </a>
+
+            <a class="dashboard-card" href="email.html">
+              <h3>Mailbox</h3>
+              <p>Unread correspondence requires attention.</p>
+            </a>
+
+            <div class="dashboard-card locked-card">
+              <h3>Disciplinary Records</h3>
+              <p>Access restricted by Academic Ethics.</p>
+            </div>
+          </div>
+
+          <p class="portal-note">
+            If a file disappears, search the place where schedules and memories overlap.
+          </p>
+        </section>
+
+        <section class="portal-panel tab-panel" id="schedule">
+          <h2>Academic Schedule Preview</h2>
+          <p>The current calendar has been partially synchronized.</p>
+          <p><a class="button" href="schedule.html">Open Full Schedule</a></p>
+        </section>
+
+        <section class="portal-panel tab-panel" id="library">
+          <h2>Veritas Library Preview</h2>
+          <p>Recently accessed item: V-13 archive request.</p>
+          <p><a class="button" href="library.html">Open Library Catalog</a></p>
+        </section>
+
+        <section class="portal-panel tab-panel" id="mailbox">
+          <h2>Mailbox Preview</h2>
+          <p>3 unread messages. One contains a restricted attachment.</p>
+          <p><a class="button" href="email.html">Open Mailbox</a></p>
+        </section>
+
+        <section class="portal-panel tab-panel" id="records">
+          <h2>Disciplinary Records</h2>
+          <p class="error">Access denied. Clearance level insufficient.</p>
+          <p class="hint">
+            Academic Ethics must approve this request.
+          </p>
+        </section>
+      </main>
+
+      <aside class="portal-cluebox">
+        <h2>Clue Drawer</h2>
+        <div class="clue-card">
+          <p><strong>Pending Archive Key</strong></p>
+          <p class="clue-text">The room code appears twice. That is not an accident.</p>
+        </div>
+
+        <div class="clue-card hidden-clue">
+          <p><strong>Hidden Note</strong></p>
+          <p>
+            Candidate review begins at 19:13.
+            Not every student record belongs to a student.
+          </p>
+        </div>
+
+        <button class="button secondary" id="revealClueBtn" type="button">Scan Hidden Note</button>
+      </aside>
     </div>
-
-    <section class="panel" style="margin-top:16px;">
-      <p class="hidden-note">
-        If a file disappears, search the place where schedules and memories overlap.
-      </p>
-    </section>
   </div>
 
   <script src="../assets/js/game.js"></script>
+  <script>
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabPanels = document.querySelectorAll(".tab-panel");
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (btn.classList.contains("locked")) return;
+
+        tabButtons.forEach(b => b.classList.remove("active"));
+        tabPanels.forEach(panel => panel.classList.remove("active"));
+
+        btn.classList.add("active");
+        const target = document.getElementById(btn.dataset.tab);
+        if (target) target.classList.add("active");
+      });
+    });
+
+    const revealBtn = document.getElementById("revealClueBtn");
+    const hiddenClue = document.querySelector(".hidden-clue");
+
+    revealBtn.addEventListener("click", () => {
+      hiddenClue.classList.toggle("revealed");
+      revealBtn.textContent = hiddenClue.classList.contains("revealed")
+        ? "Hide Hidden Note"
+        : "Scan Hidden Note";
+    });
+  </script>
 </body>
 </html>
