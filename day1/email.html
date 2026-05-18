@@ -3,56 +3,108 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mailbox</title>
+  <title>Mailbox | SAU</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body>
-  <div class="wrap">
-    <section class="panel">
-      <h1>Mailbox</h1>
-      <p>3 unread messages</p>
-
-      <div class="email">
-        <strong>From:</strong> E. Navarro<br>
-        <strong>Subject:</strong> You were right.<br><br>
-        I found the file in the Veritas archive.
-        It is not a student record.
-        It is a selection record.
+  <div class="portal-shell">
+    <header class="portal-topbar">
+      <div>
+        <h1>Saint Aurelius University</h1>
+        <p class="portal-subtitle">Secure Academic Portal | Mailbox</p>
       </div>
-
-      <div class="email">
-        <strong>From:</strong> l.valdez@saurelius.edu<br>
-        <strong>Subject:</strong> Delete this after reading.<br><br>
-        Elena, if you are still accessing this account, stop.
-        The Council has already flagged your name.
+      <div class="portal-userbox">
+        <strong>Elena Navarro</strong>
+        <span>College of Behavioral Sciences</span>
       </div>
+    </header>
 
-      <div class="email locked">
-        <strong>From:</strong> admin@saurelius.edu<br>
-        <strong>Subject:</strong> Notice of Record Revision<br><br>
-        [This message has been removed.]
-      </div>
+    <nav class="portal-nav">
+      <a class="tab-btn" href="portal.html">Dashboard</a>
+      <a class="tab-btn" href="schedule.html">Schedule</a>
+      <a class="tab-btn" href="library.html">Veritas Library</a>
+      <a class="tab-btn active" href="email.html">Mailbox</a>
+      <span class="tab-btn locked">Disciplinary Records</span>
+    </nav>
 
-      <p class="note">Attachment: <span class="redacted">council_note.txt</span></p>
-      <p class="attachment-body">
-        KNOWLEDGE DEMANDS SACRIFICE.<br>
-        Candidate review begins at 19:13.<br>
-        Archives are not for everyone.
-      </p>
+    <div class="portal-layout">
+      <aside class="portal-sidebar">
+        <h2>Quick Access</h2>
+        <ul>
+          <li><a href="portal.html">Dashboard</a></li>
+          <li><a href="schedule.html">Academic Schedule</a></li>
+          <li><a href="library.html">Library Catalog</a></li>
+          <li class="locked-item">Ethics Office</li>
+          <li class="locked-item">Council Index</li>
+        </ul>
 
-      <p class="hint">
-        The attachment contains a time and a warning. Both matter.
-      </p>
+        <div class="sidebar-clue">
+          <p><strong>System Notice</strong></p>
+          <p>3 unread messages. One contains a restricted attachment.</p>
+        </div>
+      </aside>
 
-      <form data-code-form data-answer="1913" data-target="finale.html" data-success="Access granted to restricted correspondence." data-fail="The timestamp is not correct.">
-        <label for="email-code">Enter attachment time</label>
-        <input id="email-code" type="text" placeholder="19:13" />
-        <button type="submit">Open Restricted File</button>
-      </form>
+      <main class="portal-main">
+        <section class="portal-panel">
+          <h2>Mailbox</h2>
+          <p>3 unread messages</p>
 
-      <p class="system-note" data-status></p>
-      <p><a class="button secondary" href="portal.html">Back to Dashboard</a></p>
-    </section>
+          <div class="email">
+            <strong>From:</strong> E. Navarro<br>
+            <strong>Subject:</strong> You were right.<br><br>
+            I found the file in the Veritas archive.
+            It is not a student record.
+            It is a selection record.
+          </div>
+
+          <div class="email">
+            <strong>From:</strong> l.valdez@saurelius.edu<br>
+            <strong>Subject:</strong> Delete this after reading.<br><br>
+            Elena, if you are still accessing this account, stop.
+            The Council has already flagged your name.
+          </div>
+
+          <div class="email locked">
+            <strong>From:</strong> admin@saurelius.edu<br>
+            <strong>Subject:</strong> Notice of Record Revision<br><br>
+            [This message has been removed.]
+          </div>
+
+          <p class="note">Attachment: <span class="redacted">council_note.txt</span></p>
+          <p class="attachment-body">
+            KNOWLEDGE DEMANDS SACRIFICE.<br>
+            Candidate review begins at 19:13.<br>
+            Archives are not for everyone.
+          </p>
+
+          <p class="hint">The attachment contains a time and a warning. Both matter.</p>
+
+          <form data-code-form
+                data-answer="1913"
+                data-target="finale.html"
+                data-success="Access granted to restricted correspondence."
+                data-fail="The timestamp is not correct.">
+            <label for="email-code">Enter attachment time</label>
+            <input id="email-code" type="text" placeholder="19:13" />
+            <button type="submit">Open Restricted File</button>
+          </form>
+
+          <p class="system-note" data-status></p>
+        </section>
+      </main>
+
+      <aside class="portal-cluebox">
+        <h2>Clue Drawer</h2>
+        <div class="clue-card">
+          <p><strong>Observation</strong></p>
+          <p class="clue-text">One message warns you. Another confirms the danger.</p>
+        </div>
+        <div class="clue-card">
+          <p><strong>What to notice</strong></p>
+          <p class="clue-text">The timestamp in the attachment is the key.</p>
+        </div>
+      </aside>
+    </div>
   </div>
 
   <script src="../assets/js/game.js"></script>
