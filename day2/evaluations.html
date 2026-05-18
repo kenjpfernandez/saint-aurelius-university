@@ -1,1 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Evaluations | SAU</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="day2-shell">
+  <div class="portal-shell">
+    <header class="portal-topbar">
+      <div>
+        <h1>Saint Aurelius University</h1>
+        <p class="portal-subtitle">Veritas Archive | Student Evaluations</p>
+      </div>
+      <div class="portal-userbox">
+        <strong>Archive Viewer</strong>
+        <span>Evaluation Sector</span>
+      </div>
+    </header>
 
+    <nav class="portal-nav">
+      <a class="tab-btn" href="archive.html">Archive</a>
+      <a class="tab-btn" href="yearbook.html">Yearbook</a>
+      <a class="tab-btn active" href="evaluations.html">Evaluations</a>
+      <a class="tab-btn" href="ethics.html">Ethics</a>
+      <a class="tab-btn locked" href="#">Council</a>
+    </nav>
+
+    <div class="portal-layout">
+      <aside class="portal-sidebar">
+        <h2>Archive Index</h2>
+        <ul>
+          <li><a href="archive.html">Sector Overview</a></li>
+          <li><a href="yearbook.html">Yearbook Scan</a></li>
+          <li><a href="evaluations.html">Student Evaluations</a></li>
+          <li><a href="ethics.html">Ethics Committee</a></li>
+          <li class="locked-item">Council Files</li>
+        </ul>
+
+        <div class="sidebar-clue">
+          <p><strong>Notice</strong></p>
+          <p>Profiles were used to determine who could continue. Not everyone passed.</p>
+        </div>
+      </aside>
+
+      <main class="portal-main">
+        <section class="portal-panel">
+          <h2>Psychological Evaluation File</h2>
+          <p>Candidate profile: Elena Navarro</p>
+
+          <div class="email">
+            <strong>Resilience Index:</strong> HIGH<br>
+            <strong>Institutional Loyalty:</strong> ACCEPTABLE<br>
+            <strong>Behavioral Stability:</strong> EXCELLENT<br><br>
+            Recommendation: CONTINUE OBSERVATION
+          </div>
+
+          <div class="email">
+            <strong>Candidate:</strong> E. Navarro<br>
+            <strong>Internal Notes:</strong> Does not conform to baseline compliance patterns.
+          </div>
+
+          <p class="alert">
+            The evaluation does not measure intelligence alone.
+            It measures how a student responds to pressure.
+          </p>
+
+          <p class="matrix-note">
+            Compare the values across the file. One sector code appears more than once.
+          </p>
+
+          <form data-code-form
+                data-answer="SECTOR-13"
+                data-target="ethics.html"
+                data-success="Sector match confirmed. Opening Ethics Committee records..."
+                data-fail="The sector code does not match the profile.">
+            <label for="eval-code">Enter sector code</label>
+            <input id="eval-code" type="text" placeholder="Sector code" />
+            <button type="submit">Open Ethics Records</button>
+          </form>
+
+          <p class="system-note" data-status></p>
+        </section>
+      </main>
+
+      <aside class="portal-cluebox">
+        <h2>Clue Drawer</h2>
+        <div class="clue-card">
+          <p><strong>Observation</strong></p>
+          <p class="clue-text">The candidate profile contains a sector marker that appears again in the file.</p>
+        </div>
+        <div class="clue-card">
+          <p><strong>Hint</strong></p>
+          <p class="clue-text">The answer looks like a department code, not a student name.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="../assets/js/game.js"></script>
+</body>
+</html>
