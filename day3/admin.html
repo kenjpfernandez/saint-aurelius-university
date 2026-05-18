@@ -1,1 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Council Network | SAU</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="day3-shell">
+  <div class="portal-shell">
+    <header class="portal-topbar">
+      <div>
+        <h1>Saint Aurelius University</h1>
+        <p class="portal-subtitle">Council Network | Administrative Access Attempt</p>
+      </div>
+      <div class="portal-userbox">
+        <strong>Trace Session</strong>
+        <span>Level 03</span>
+      </div>
+    </header>
 
+    <nav class="portal-nav">
+      <a class="tab-btn" href="../day1/portal.html">Day 1</a>
+      <a class="tab-btn" href="../day2/archive.html">Day 2</a>
+      <a class="tab-btn active" href="admin.html">Council Network</a>
+      <a class="tab-btn locked" href="#">Selection Log</a>
+    </nav>
+
+    <div class="portal-layout">
+      <aside class="portal-sidebar">
+        <h2>Network Nodes</h2>
+        <ul>
+          <li><a href="admin.html">Live Admin Console</a></li>
+          <li class="locked-item">Selection Log</li>
+          <li class="locked-item">Council Transcript</li>
+          <li class="locked-item">Final Decision</li>
+        </ul>
+
+        <div class="sidebar-clue">
+          <p><strong>Warning</strong></p>
+          <p>This network is actively monitoring your session.</p>
+        </div>
+      </aside>
+
+      <main class="portal-main">
+        <section class="portal-panel">
+          <div class="archive-banner">
+            <div class="glow-warning">UNAUTHORIZED COUNCIL LINK DETECTED</div>
+            <div class="matrix-note">Access is temporary. Trace is in progress.</div>
+          </div>
+
+          <h2>Live Administrative Console</h2>
+          <p>Internal nodes available:</p>
+
+          <div class="archive-grid">
+            <div class="archive-folder">
+              <strong>OPEN</strong><br>Student Verification
+            </div>
+            <div class="archive-folder">
+              <strong>OPEN</strong><br>Archive Purge Queue
+            </div>
+            <div class="archive-folder locked">
+              <strong>LOCKED</strong><br>Selection Log
+            </div>
+            <div class="archive-folder locked">
+              <strong>LOCKED</strong><br>Council Transcript
+            </div>
+          </div>
+
+          <p class="alert" style="margin-top:16px;">
+            Root credentials required to continue. The trace suggests a phrase used in old council files.
+          </p>
+
+          <form data-code-form
+                data-answer="ROOT ACCESS"
+                data-target="council.html"
+                data-success="Root credentials accepted. Opening Council Transcript..."
+                data-fail="That credential was rejected.">
+            <label for="root-code">Enter root credential</label>
+            <input id="root-code" type="text" placeholder="ROOT ACCESS" />
+            <button type="submit">Unlock Transcript</button>
+          </form>
+
+          <p class="system-note" data-status></p>
+        </section>
+      </main>
+
+      <aside class="portal-cluebox">
+        <h2>Clue Drawer</h2>
+        <div class="clue-card">
+          <p><strong>Observation</strong></p>
+          <p class="clue-text">The access phrase is not a name. It is a system phrase.</p>
+        </div>
+        <div class="clue-card">
+          <p><strong>Hint</strong></p>
+          <p class="clue-text">Think of what an admin would type to open hidden records.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="../assets/js/game.js"></script>
+</body>
+</html>
