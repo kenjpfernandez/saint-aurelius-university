@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mailbox</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <section class="panel">
+      <h1>Mailbox</h1>
+      <p>3 unread messages</p>
+
+      <div class="email">
+        <strong>From:</strong> E. Navarro<br>
+        <strong>Subject:</strong> You were right.<br><br>
+        I found the file in the Veritas archive.
+        It is not a student record.
+        It is a selection record.
+      </div>
+
+      <div class="email">
+        <strong>From:</strong> l.valdez@saurelius.edu<br>
+        <strong>Subject:</strong> Delete this after reading.<br><br>
+        Elena, if you are still accessing this account, stop.
+        The Council has already flagged your name.
+      </div>
+
+      <div class="email locked">
+        <strong>From:</strong> admin@saurelius.edu<br>
+        <strong>Subject:</strong> Notice of Record Revision<br><br>
+        [This message has been removed.]
+      </div>
+
+      <p class="note">Attachment: <span class="redacted">council_note.txt</span></p>
+      <p class="attachment-body">
+        KNOWLEDGE DEMANDS SACRIFICE.<br>
+        Candidate review begins at 19:13.<br>
+        Archives are not for everyone.
+      </p>
+
+      <p class="hint">
+        The attachment contains a time and a warning. Both matter.
+      </p>
+
+      <form data-code-form data-answer="1913" data-target="finale.html" data-success="Access granted to restricted correspondence." data-fail="The timestamp is not correct.">
+        <label for="email-code">Enter attachment time</label>
+        <input id="email-code" type="text" placeholder="19:13" />
+        <button type="submit">Open Restricted File</button>
+      </form>
+
+      <p class="system-note" data-status></p>
+      <p><a class="button secondary" href="portal.html">Back to Dashboard</a></p>
+    </section>
+  </div>
+
+  <script src="../assets/js/game.js"></script>
+</body>
+</html>
