@@ -57,7 +57,8 @@ if (clueBtn) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const answer = form.querySelector("input")?.value.trim().toUpperCase();
+      
+      const answer = form.querySelector("input")?.value.trim().replace(/\s+/g, " ").toUpperCase();
       const code = (form.dataset.answer || "").toUpperCase();
       const target = form.dataset.target || "";
       const successText = form.dataset.success || "Unlocked.";
