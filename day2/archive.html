@@ -1,1 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Veritas Archive | SAU</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="day2-shell">
+  <div class="portal-shell">
+    <header class="portal-topbar">
+      <div>
+        <h1>Saint Aurelius University</h1>
+        <p class="portal-subtitle">Veritas Archive | Unauthorized Session Active</p>
+      </div>
+      <div class="portal-userbox">
+        <strong>Archive Viewer</strong>
+        <span>Temporary Access</span>
+      </div>
+    </header>
 
+    <nav class="portal-nav">
+      <a class="tab-btn" href="../day1/portal.html">Day 1</a>
+      <a class="tab-btn active" href="archive.html">Archive</a>
+      <a class="tab-btn" href="yearbook.html">Yearbook</a>
+      <a class="tab-btn" href="evaluations.html">Evaluations</a>
+      <a class="tab-btn" href="ethics.html">Ethics</a>
+      <a class="tab-btn locked" href="#">Council</a>
+    </nav>
+
+    <div class="portal-layout">
+      <aside class="portal-sidebar">
+        <h2>Archive Index</h2>
+        <ul>
+          <li><a href="archive.html">Sector Overview</a></li>
+          <li><a href="yearbook.html">Yearbook Scan</a></li>
+          <li><a href="evaluations.html">Student Evaluations</a></li>
+          <li><a href="ethics.html">Ethics Committee</a></li>
+          <li class="locked-item">Council Files</li>
+        </ul>
+
+        <div class="sidebar-clue">
+          <p><strong>Notice</strong></p>
+          <p>Some files may have been intentionally altered. Proceed carefully.</p>
+        </div>
+      </aside>
+
+      <main class="portal-main">
+        <section class="portal-panel">
+          <div class="archive-banner">
+            <div class="glow-warning">VERITAS ARCHIVE ACCESS GRANTED</div>
+            <div class="matrix-note">
+              "Knowledge preserves the institution. Selection preserves the future."
+            </div>
+          </div>
+
+          <h2>Archive Sector Overview</h2>
+          <p>Select a directory to continue. Some folders are locked.</p>
+
+          <div class="archive-grid">
+            <a class="archive-folder" href="yearbook.html">
+              <strong>OPEN</strong><br>Student Research
+            </a>
+            <a class="archive-folder" href="yearbook.html">
+              <strong>OPEN</strong><br>Thesis Index
+            </a>
+            <div class="archive-folder locked">
+              <strong>LOCKED</strong><br>Candidate Files
+            </div>
+            <a class="archive-folder" href="ethics.html">
+              <strong>CORRUPTED</strong><br>Ethics Review
+            </a>
+            <div class="archive-folder locked">
+              <strong>LOCKED</strong><br>Honor Council
+            </div>
+          </div>
+
+          <p class="alert" style="margin-top:16px;">
+            Archive classification key is incomplete.
+            Search for the repeated folder code.
+          </p>
+
+          <form data-code-form
+                data-answer="AURELIAN"
+                data-target="yearbook.html"
+                data-success="Classification key accepted. Opening Yearbook Scan..."
+                data-fail="That key did not match any archive directory.">
+            <label for="archive-code">Enter classification key</label>
+            <input id="archive-code" type="text" placeholder="Archive keyword" />
+            <button type="submit">Open Folder</button>
+          </form>
+
+          <p class="system-note" data-status></p>
+        </section>
+      </main>
+
+      <aside class="portal-cluebox">
+        <h2>Clue Drawer</h2>
+        <div class="clue-card">
+          <p><strong>Observation</strong></p>
+          <p class="clue-text">One phrase repeats across archive notes. That phrase is your key.</p>
+        </div>
+        <div class="clue-card">
+          <p><strong>Hint</strong></p>
+          <p class="clue-text">Look for a word that sounds like it belongs to the university itself.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="../assets/js/game.js"></script>
+</body>
+</html>
