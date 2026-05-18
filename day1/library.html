@@ -1,25 +1,45 @@
-<h1>Veritas Library Catalog</h1>
-<p>Search results for: V-13</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Veritas Library Catalog</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <section class="panel">
+      <h1>Veritas Library Catalog</h1>
+      <p>Search results for: V-13</p>
 
-<ul>
-  <li>Behavioral Compliance in Elite Academic Environments — L. Santos</li>
-  <li>Institutional Trust and Student Retention — M. Reyes</li>
-  <li>Archived Thesis 17: <span class="redacted">[REDACTED]</span></li>
-  <li>Memory, Merit, and Selection — E. Navarro</li>
-  <li>Honor and Obligation in Campus Governance — J. Cruz</li>
-</ul>
+      <ul>
+        <li>Behavioral Compliance in Elite Academic Environments — L. Santos</li>
+        <li>Institutional Trust and Student Retention — M. Reyes</li>
+        <li>Archived Thesis 17: <span class="redacted">[REDACTED]</span></li>
+        <li>Memory, Merit, and Selection — E. Navarro</li>
+        <li>Honor and Obligation in Campus Governance — J. Cruz</li>
+      </ul>
 
-<p class="note">
-  One thesis is missing from the catalog.
-  The title was removed, but the call number was not.
-</p>
+      <p class="note">
+        One thesis is missing from the catalog.
+        The title was removed, but the call number was not.
+      </p>
+      <p class="hint">
+        The missing thesis is not gone. It was moved into a restricted file set.
+        Check for repeated initials.
+      </p>
 
-<p class="hint">
-  The missing thesis is not gone. It was moved into a restricted file set.
-  Check for repeated initials.
-</p>
+      <form data-code-form data-answer="HONOR" data-target="email.html" data-success="Restricted index located. Accessing mailbox..." data-fail="No matching archive keyword found.">
+        <label for="library-code">Enter archive keyword</label>
+        <input id="library-code" type="text" placeholder="Keyword" />
+        <button type="submit">Open Mailbox</button>
+      </form>
 
-<p class="success">
-  Restricted index located.
-  Access requires a faculty correspondence key.
-</p>
+      <p class="system-note" data-status></p>
+      <p><a class="button secondary" href="portal.html">Back to Dashboard</a></p>
+    </section>
+  </div>
+
+  <script src="../assets/js/game.js"></script>
+</body>
+</html>
