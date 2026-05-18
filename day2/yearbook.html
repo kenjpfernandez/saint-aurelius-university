@@ -1,1 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Yearbook Scan | SAU</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="day2-shell">
+  <div class="portal-shell">
+    <header class="portal-topbar">
+      <div>
+        <h1>Saint Aurelius University</h1>
+        <p class="portal-subtitle">Veritas Archive | Yearbook Scan</p>
+      </div>
+      <div class="portal-userbox">
+        <strong>Archive Viewer</strong>
+        <span>Yearbook Sector</span>
+      </div>
+    </header>
 
+    <nav class="portal-nav">
+      <a class="tab-btn" href="archive.html">Archive</a>
+      <a class="tab-btn active" href="yearbook.html">Yearbook</a>
+      <a class="tab-btn" href="evaluations.html">Evaluations</a>
+      <a class="tab-btn" href="ethics.html">Ethics</a>
+      <a class="tab-btn locked" href="#">Council</a>
+    </nav>
+
+    <div class="portal-layout">
+      <aside class="portal-sidebar">
+        <h2>Archive Index</h2>
+        <ul>
+          <li><a href="archive.html">Sector Overview</a></li>
+          <li><a href="yearbook.html">Yearbook Scan</a></li>
+          <li><a href="evaluations.html">Student Evaluations</a></li>
+          <li><a href="ethics.html">Ethics Committee</a></li>
+          <li class="locked-item">Council Files</li>
+        </ul>
+
+        <div class="sidebar-clue">
+          <p><strong>Notice</strong></p>
+          <p>Some students appear in multiple years. That should not happen.</p>
+        </div>
+      </aside>
+
+      <main class="portal-main">
+        <section class="portal-panel">
+          <h2>Yearbook Anomaly Scan</h2>
+          <p>Graduating class records from selected years.</p>
+
+          <ul class="file-list">
+            <li>1988 — Daniel Navarro <span class="code-tag">SELECTED</span></li>
+            <li>2004 — Daniel Navarro <span class="code-tag">SELECTED</span></li>
+            <li>2021 — Daniel Navarro <span class="code-tag">SELECTED</span></li>
+            <li>1996 — Lucia Valdez <span class="code-tag">FACULTY</span></li>
+            <li>2018 — Elena Navarro <span class="code-tag">HONOR</span></li>
+          </ul>
+
+          <p class="alert" style="margin-top:16px;">
+            One name repeats across decades. Another record is missing entirely.
+          </p>
+
+          <p class="matrix-note">
+            The initials of the repeated students form a keyword. That keyword opens the evaluation file.
+          </p>
+
+          <form data-code-form
+                data-answer="SELECTED"
+                data-target="evaluations.html"
+                data-success="Yearbook anomaly confirmed. Opening Student Evaluations..."
+                data-fail="That keyword does not match the pattern in the archive.">
+            <label for="yearbook-code">Enter anomaly keyword</label>
+            <input id="yearbook-code" type="text" placeholder="Keyword" />
+            <button type="submit">Open Evaluations</button>
+          </form>
+
+          <p class="system-note" data-status></p>
+        </section>
+      </main>
+
+      <aside class="portal-cluebox">
+        <h2>Clue Drawer</h2>
+        <div class="clue-card">
+          <p><strong>Observation</strong></p>
+          <p class="clue-text">One student appears in multiple decades. That is the pattern.</p>
+        </div>
+        <div class="clue-card">
+          <p><strong>Hint</strong></p>
+          <p class="clue-text">The word you need is literally what the archive is doing to these students.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="../assets/js/game.js"></script>
+</body>
+</html>
