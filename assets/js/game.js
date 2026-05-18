@@ -9,16 +9,6 @@
     }
   };
 
-  const clueBtn = document.getElementById("revealClueBtn");
-if (clueBtn) {
-  clueBtn.addEventListener("click", () => {
-    const sound = document.getElementById("glitch-sfx");
-    if (sound) {
-      sound.currentTime = 0;
-      sound.play().catch(() => {});
-    }
-  });
-
   const playSound = (id) => {
     const audio = document.getElementById(id);
     if (!audio) return;
@@ -28,7 +18,6 @@ if (clueBtn) {
 
   window.SAU = { unlock, playSound };
 
-  // Login page
   const loginForm = document.querySelector("[data-login-form]");
   if (loginForm) {
     loginForm.addEventListener("submit", (e) => {
@@ -51,6 +40,39 @@ if (clueBtn) {
       }
     });
   }
+
+  document.querySelectorAll("[data-code-form]").forEach((form) => {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const answer = form.querySelector("input")?.value.trim().replace(/\s+/g, " ").toUpperCase();
+      const code = (form.dataset.answer || "").toUpperCase();
+      const target = form.dataset.target || "";
+      const successText = form.dataset.success || "Unlocked.";
+      const failText = form.dataset.fail || "Incorrect code.";
+
+      if (answer === code) {
+        playSound("unlock-sfx");
+        unlock(successText, target);
+      } else {
+        playSound("error-sfx");
+        const status = form.parentElement.querySelector("[data-status]");
+        if (status) status.textContent = failText;
+      }
+    });
+  });
+
+  const clueBtn = document.getElementById("revealClueBtn");
+  if (clueBtn) {
+    clueBtn.addEventListener("click", () => {
+      const sound = document.getElementById("glitch-sfx");
+      if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(() => {});
+      }
+    });
+  }
+})();
 
   // Generic code check boxes
   document.querySelectorAll("[data-code-form]").forEach((form) => {
