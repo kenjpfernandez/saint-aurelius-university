@@ -1,1 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Council Transcript | SAU</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="day3-shell">
+  <div class="portal-shell">
+    <header class="portal-topbar">
+      <div>
+        <h1>Saint Aurelius University</h1>
+        <p class="portal-subtitle">Council Network | Transcript Recovery</p>
+      </div>
+      <div class="portal-userbox">
+        <strong>Trace Session</strong>
+        <span>Level 03</span>
+      </div>
+    </header>
 
+    <nav class="portal-nav">
+      <a class="tab-btn" href="admin.html">Admin Console</a>
+      <a class="tab-btn active" href="council.html">Transcript</a>
+      <a class="tab-btn locked" href="#">Selection Log</a>
+      <a class="tab-btn locked" href="#">Final Decision</a>
+    </nav>
+
+    <div class="portal-layout">
+      <aside class="portal-sidebar">
+        <h2>Network Nodes</h2>
+        <ul>
+          <li><a href="admin.html">Live Admin Console</a></li>
+          <li><a href="council.html">Council Transcript</a></li>
+          <li class="locked-item">Selection Log</li>
+          <li class="locked-item">Final Decision</li>
+        </ul>
+
+        <div class="sidebar-clue">
+          <p><strong>Warning</strong></p>
+          <p>The transcript contains the reason the Council exists.</p>
+        </div>
+      </aside>
+
+      <main class="portal-main">
+        <section class="portal-panel">
+          <h2>Recovered Council Transcript</h2>
+
+          <div class="email">
+            <strong>Member 1:</strong><br>
+            Candidates are no longer volunteers. They are patterns.
+          </div>
+
+          <div class="email">
+            <strong>Member 2:</strong><br>
+            Elena Navarro failed compliance, but succeeded in resistance.
+          </div>
+
+          <div class="email">
+            <strong>Member 3:</strong><br>
+            The program is not about producing excellence.
+            It is about producing obedience.
+          </div>
+
+          <p class="alert">
+            The Council does not choose students for intelligence alone.
+            It chooses people who can carry the institution forward without questioning it.
+          </p>
+
+          <p class="matrix-note">
+            One final word unlocks the decision page. It is a warning, a vow, and a symbol of the Council.
+          </p>
+
+          <form data-code-form
+                data-answer="OATH"
+                data-target="decision.html"
+                data-success="Transcript complete. Final decision unlocked..."
+                data-fail="That final word was not found in the transcript.">
+            <label for="transcript-code">Enter final transcript word</label>
+            <input id="transcript-code" type="text" placeholder="Final word" />
+            <button type="submit">Open Final Decision</button>
+          </form>
+
+          <p class="system-note" data-status></p>
+        </section>
+      </main>
+
+      <aside class="portal-cluebox">
+        <h2>Clue Drawer</h2>
+        <div class="clue-card">
+          <p><strong>Observation</strong></p>
+          <p class="clue-text">The transcript describes the Council’s purpose in one short word.</p>
+        </div>
+        <div class="clue-card">
+          <p><strong>Hint</strong></p>
+          <p class="clue-text">It sounds like something a member swears to protect.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="../assets/js/game.js"></script>
+</body>
+</html>
