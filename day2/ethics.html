@@ -1,1 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ethics Committee | SAU</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="day2-shell">
+  <div class="portal-shell">
+    <header class="portal-topbar">
+      <div>
+        <h1>Saint Aurelius University</h1>
+        <p class="portal-subtitle">Veritas Archive | Ethics Committee</p>
+      </div>
+      <div class="portal-userbox">
+        <strong>Archive Viewer</strong>
+        <span>Ethics Sector</span>
+      </div>
+    </header>
 
+    <nav class="portal-nav">
+      <a class="tab-btn" href="archive.html">Archive</a>
+      <a class="tab-btn" href="yearbook.html">Yearbook</a>
+      <a class="tab-btn" href="evaluations.html">Evaluations</a>
+      <a class="tab-btn active" href="ethics.html">Ethics</a>
+      <a class="tab-btn locked" href="#">Council</a>
+    </nav>
+
+    <div class="portal-layout">
+      <aside class="portal-sidebar">
+        <h2>Archive Index</h2>
+        <ul>
+          <li><a href="archive.html">Sector Overview</a></li>
+          <li><a href="yearbook.html">Yearbook Scan</a></li>
+          <li><a href="evaluations.html">Student Evaluations</a></li>
+          <li><a href="ethics.html">Ethics Committee</a></li>
+          <li class="locked-item">Council Files</li>
+        </ul>
+
+        <div class="sidebar-clue">
+          <p><strong>Notice</strong></p>
+          <p>Faculty objections were recorded. Most were ignored.</p>
+        </div>
+      </aside>
+
+      <main class="portal-main">
+        <section class="portal-panel">
+          <h2>Ethics Committee Minutes</h2>
+
+          <div class="email">
+            <strong>From:</strong> Prof. Lucia Valdez<br>
+            <strong>Subject:</strong> Objection to the selection protocol<br><br>
+            The students were never informed.
+            This is no longer research.
+          </div>
+
+          <div class="email">
+            <strong>From:</strong> Dean Office<br>
+            <strong>Subject:</strong> Committee Review Outcome<br><br>
+            The objection has been noted.
+            The protocol remains active.
+          </div>
+
+          <p class="alert">
+            The Ethics Committee opposed the program, but the program continued anyway.
+          </p>
+
+          <p class="matrix-note">
+            One hidden word appears in the committee minutes. That word opens the candidate file.
+          </p>
+
+          <form data-code-form
+                data-answer="ASCENSION"
+                data-target="candidate.html"
+                data-success="Committee record unlocked. Opening Candidate Files..."
+                data-fail="That keyword is not in the minutes.">
+            <label for="ethics-code">Enter hidden committee word</label>
+            <input id="ethics-code" type="text" placeholder="Hidden word" />
+            <button type="submit">Open Candidate Files</button>
+          </form>
+
+          <p class="system-note" data-status></p>
+        </section>
+      </main>
+
+      <aside class="portal-cluebox">
+        <h2>Clue Drawer</h2>
+        <div class="clue-card">
+          <p><strong>Observation</strong></p>
+          <p class="clue-text">The faculty fought the protocol, but they lost.</p>
+        </div>
+        <div class="clue-card">
+          <p><strong>Hint</strong></p>
+          <p class="clue-text">Look for a word that sounds like a project name, not a rule.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="../assets/js/game.js"></script>
+</body>
+</html>
