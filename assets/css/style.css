@@ -410,6 +410,7 @@ button:hover,
 }
 
 /* Day 2 mood: colder, more restricted */
+
 .day2-shell {
   --bg: #f6f1e8;
   --panel: #fcf7f0;
@@ -484,4 +485,118 @@ button:hover,
   font-family: "Inter", sans-serif;
   font-size: 0.95rem;
   color: var(--muted);
+}
+
+/* Day 3 mood: dark, tense, final */
+.day3-shell {
+  --bg: #120f0f;
+  --panel: #1a1616;
+  --ink: #f5ede5;
+  --muted: #b8aca1;
+  --accent: #a32626;
+  --gold: #b08a57;
+  --line: #332b2b;
+  --success: #2e8a57;
+  --error: #d24a4a;
+  --glitch: #ff4d4d;
+}
+
+.day3-shell .portal-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(163, 38, 38, 0.08), transparent 35%),
+    linear-gradient(180deg, #130f0f 0%, #1a1616 100%);
+  color: var(--ink);
+}
+
+.day3-shell .portal-topbar,
+.day3-shell .portal-nav,
+.day3-shell .portal-sidebar,
+.day3-shell .portal-cluebox,
+.day3-shell .portal-panel {
+  background: rgba(20, 16, 16, 0.86);
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.day3-shell .portal-subtitle,
+.day3-shell .system-note,
+.day3-shell .matrix-note,
+.day3-shell .clue-text,
+.day3-shell .note,
+.day3-shell .hint,
+.day3-shell .portal-note {
+  color: var(--muted);
+}
+
+.day3-shell .tab-btn {
+  background: #241f1f;
+  color: var(--ink);
+  border-color: #3d3333;
+}
+
+.day3-shell .tab-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.day3-shell .alert {
+  border-left-color: var(--accent);
+  background: rgba(163, 38, 38, 0.08);
+}
+
+.day3-shell .email,
+.day3-shell .archive-folder,
+.day3-shell .dashboard-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: #3a2f2f;
+  color: var(--ink);
+}
+
+.day3-shell .file-list li {
+  border-bottom-color: #3a2f2f;
+}
+
+.day3-shell .glow-warning {
+  color: #ff7070;
+}
+
+.day3-shell .decision-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 18px;
+}
+
+.day3-shell .decision-card {
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid #3a2f2f;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.day3-shell .decision-card h3 {
+  margin-bottom: 10px;
+}
+
+.day3-shell .decision-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(163, 38, 38, 0.7);
+}
+
+.day3-shell .ending-box {
+  border: 1px solid #3a2f2f;
+  border-radius: 14px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  margin-top: 16px;
+}
+
+.day3-shell .ending-title {
+  color: #ffb1b1;
+  margin-bottom: 10px;
 }
