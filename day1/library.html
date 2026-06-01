@@ -1,103 +1,497 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Veritas Library | SAU</title>
-  <link rel="stylesheet" href="../assets/css/style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saint Aurelius University — Library Records</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171b22;
+      --panel-2: #12161c;
+      --text: #e9edf3;
+      --muted: #98a2b3;
+      --line: rgba(255,255,255,0.12);
+      --accent: #c8a96a;
+      --accent-2: #7f8cff;
+      --danger: #ff6b6b;
+      --success: #7ad58b;
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+      --radius: 22px;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(200,169,106,0.10), transparent 28%),
+        linear-gradient(180deg, #0b0d12 0%, #10131a 55%, #0b0d12 100%);
+      color: var(--text);
+      padding: 28px;
+    }
+
+    .shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 26px 28px 20px;
+      background:
+        linear-gradient(180deg, rgba(200,169,106,0.08), transparent 60%),
+        rgba(255,255,255,0.02);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      margin: 10px 0 0;
+      color: var(--muted);
+      max-width: 70ch;
+      line-height: 1.65;
+    }
+
+    .status-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.88rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+      padding: 22px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+
+    .panel p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.95rem;
+    }
+
+    th {
+      color: #d8dde6;
+      font-weight: 600;
+      background: rgba(255,255,255,0.03);
+    }
+
+    td.muted { color: var(--muted); }
+    .redacted {
+      letter-spacing: 0.18em;
+      color: rgba(233,237,243,0.5);
+    }
+
+    .form {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: #cfd6e1;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(10,12,16,0.8);
+      color: var(--text);
+      outline: none;
+      font-size: 1rem;
+    }
+
+    input[type="text"]:focus {
+      border-color: rgba(127,140,255,0.55);
+      box-shadow: 0 0 0 4px rgba(127,140,255,0.12);
+    }
+
+    button, .button-link {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button:hover, .button-link:hover { transform: translateY(-1px); }
+    button:active, .button-link:active { transform: translateY(0); }
+
+    .primary {
+      background: linear-gradient(180deg, #d6bb7e, #b8944d);
+      color: #141414;
+    }
+
+    .secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .feedback {
+      min-height: 24px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .feedback.error { color: var(--danger); }
+    .feedback.success { color: var(--success); }
+
+    .unlock {
+      display: none;
+      margin-top: 12px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(122,213,139,0.35);
+      background: rgba(122,213,139,0.08);
+    }
+
+    .unlock strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--success);
+      letter-spacing: 0.02em;
+    }
+
+    .locked-note {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px dashed rgba(200,169,106,0.35);
+      background: rgba(200,169,106,0.07);
+      color: #eadbb6;
+      line-height: 1.65;
+    }
+
+    .footer {
+      margin-top: 16px;
+      color: rgba(233,237,243,0.35);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .aside {
+      display: grid;
+      gap: 22px;
+      align-content: start;
+    }
+
+    .monitor {
+      min-height: 260px;
+      display: grid;
+      align-content: space-between;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #d5dbea;
+    }
+
+    .scanline {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scanline::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+      animation: scan 6s linear infinite;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes scan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
+    .tiny {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hint-box {
+      border-left: 3px solid rgba(200,169,106,0.75);
+      padding-left: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(127,140,255,0.3);
+      background: rgba(127,140,255,0.08);
+      color: #dfe4ff;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 1024px) {
+      .shell { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 16px; }
+      .header, .grid { padding: 18px; }
+      .input-row { grid-template-columns: 1fr; }
+      button, .button-link { width: 100%; }
+    }
+  </style>
 </head>
 <body>
-  <div class="portal-shell">
-    <header class="portal-topbar">
-      <div>
-        <h1>Saint Aurelius University</h1>
-        <p class="portal-subtitle">Secure Academic Portal | Veritas Library</p>
-      </div>
-      <div class="portal-userbox">
-        <strong>Elena Navarro</strong>
-        <span>College of Behavioral Sciences</span>
-      </div>
-    </header>
-
-    <nav class="portal-nav">
-      <a class="tab-btn" href="portal.html">Dashboard</a>
-      <a class="tab-btn" href="schedule.html">Schedule</a>
-      <a class="tab-btn active" href="library.html">Veritas Library</a>
-      <a class="tab-btn" href="email.html">Mailbox</a>
-      <span class="tab-btn locked">Disciplinary Records</span>
-    </nav>
-
-    <div class="portal-layout">
-      <aside class="portal-sidebar">
-        <h2>Quick Access</h2>
-        <ul>
-          <li><a href="portal.html">Dashboard</a></li>
-          <li><a href="schedule.html">Academic Schedule</a></li>
-          <li><a href="email.html">Mailbox</a></li>
-          <li class="locked-item">Ethics Office</li>
-          <li class="locked-item">Council Index</li>
-        </ul>
-
-        <div class="sidebar-clue">
-          <p><strong>System Notice</strong></p>
-          <p>The missing thesis is not gone. It was moved into a restricted file set.</p>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <p class="eyebrow">Saint Aurelius University // Restricted Access</p>
+        <h1>Library Records</h1>
+        <p class="subtitle">
+          The archive mirror has surfaced a sequence of borrowed titles linked to the missing student.
+          One pattern appears across multiple records: a repeated research focus on the North Wing Annex.
+        </p>
+        <div class="status-bar">
+          <span class="pill">Case File: Day 1</span>
+          <span class="pill">Objective: Recover the research trail</span>
+          <span class="pill">Status: Borrow Log Fragmented</span>
         </div>
-      </aside>
+      </div>
 
-      <main class="portal-main">
-        <section class="portal-panel">
-          <h2>Veritas Library Catalog</h2>
-          <p>Search results for: V-13</p>
+      <div class="grid">
+        <div class="panel">
+          <h2>Recovered Checkout Records</h2>
+          <p>Dates and titles from the library ledger. One year appears more relevant than the rest.</p>
 
-          <ul>
-            <li>Behavioral Compliance in Elite Academic Environments — L. Santos</li>
-            <li>Institutional Trust and Student Retention — M. Reyes</li>
-            <li>Archived Thesis 17: <span class="redacted">[REDACTED]</span></li>
-            <li>Memory, Merit, and Selection — E. Navarro</li>
-            <li>Honor and Obligation in Campus Governance — J. Cruz</li>
-          </ul>
+          <div class="table-wrap" style="margin-top: 14px;">
+            <table aria-label="Library checkout records">
+              <thead>
+                <tr>
+                  <th style="width: 18%;">Date</th>
+                  <th>Title</th>
+                  <th style="width: 20%;">Shelf</th>
+                  <th style="width: 18%;">Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1981</td>
+                  <td>Campus Architecture</td>
+                  <td>F-12</td>
+                  <td class="muted">Reference copy</td>
+                </tr>
+                <tr>
+                  <td>1984</td>
+                  <td>Hidden Foundations</td>
+                  <td>F-18</td>
+                  <td class="muted">Marked</td>
+                </tr>
+                <tr>
+                  <td>1985</td>
+                  <td>Beneath Aurelius</td>
+                  <td>F-21</td>
+                  <td class="muted">Restricted</td>
+                </tr>
+                <tr>
+                  <td>1987</td>
+                  <td>North Wing Development</td>
+                  <td>F-04</td>
+                  <td>Repeated</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-          <p class="note">
-            One thesis is missing from the catalog.
-            The title was removed, but the call number was not.
+          <div class="tag">Hidden marker: last research year</div>
+        </div>
+
+        <div class="panel">
+          <h2>Recovery Prompt</h2>
+          <p>
+            The archive suggests one year matters more than the others. Identify the year that aligns with the most relevant book trail and proceed.
           </p>
 
-          <p class="hint">
-            Check for repeated initials. The keyword you need is hidden in plain sight.
-          </p>
+          <div class="form" style="margin-top: 16px;">
+            <label for="code">Enter the key year</label>
+            <div class="input-row">
+              <input id="code" type="text" inputmode="numeric" autocomplete="off" placeholder="Enter year" aria-describedby="feedback" />
+              <button class="primary" id="submitBtn" type="button">Verify</button>
+            </div>
+            <div class="feedback" id="feedback" aria-live="polite"></div>
 
-          <form data-code-form
-                data-answer="HONOR"
-                data-target="email.html"
-                data-success="Restricted index located. Accessing mailbox..."
-                data-fail="No matching archive keyword found.">
-            <label for="library-code">Enter archive keyword</label>
-            <input id="library-code" type="text" placeholder="Keyword" />
-            <button type="submit">Open Mailbox</button>
-          </form>
-
-          <p class="system-note" data-status></p>
-        </section>
-      </main>
-
-      <aside class="portal-cluebox">
-        <h2>Clue Drawer</h2>
-        <div class="clue-card">
-          <p><strong>Observation</strong></p>
-          <p class="clue-text">One title is missing, but the pattern remains.</p>
+            <div class="unlock" id="unlockBox">
+              <strong>Access granted.</strong>
+              <div class="tiny" style="margin-bottom: 12px;">
+                Research trail restored. The dormitory logs are now available.
+              </div>
+              <a class="button-link secondary" href="dormitory.html">Open Dormitory Logs</a>
+            </div>
+          </div>
         </div>
-        <div class="clue-card">
-          <p><strong>What to notice</strong></p>
-          <p class="clue-text">The word you need appears across the catalog theme itself.</p>
-        </div>
-      </aside>
-    </div>
-  </div>
 
-  <script src="../assets/js/game.js"></script>
+        <div class="panel">
+          <h2>Archive Notice</h2>
+          <div class="locked-note">
+            <strong style="display:block; margin-bottom: 6px; color: var(--accent);">SYSTEM MESSAGE</strong>
+            The library is not just a source of books. It is also where patterns hide in plain sight.
+            When a student repeatedly returns to the same year, the archive is telling you something.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="aside">
+      <section class="card monitor scanline">
+        <div class="header">
+          <p class="eyebrow">Archive Terminal</p>
+          <h1 style="font-size: 1.5rem;">Research Trace Console</h1>
+        </div>
+        <div class="grid mono">
+          <div>&gt; loading checkout ledger...</div>
+          <div>&gt; repeated references found</div>
+          <div>&gt; north wing annex appears in multiple entries</div>
+          <div>&gt; relevant year flagged: 1987</div>
+          <div>&gt; next archive: dormitory log</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="header">
+          <p class="eyebrow">Design Note</p>
+          <h1 style="font-size: 1.35rem;">Puzzle Intent</h1>
+        </div>
+        <div class="grid">
+          <div class="tiny hint-box">
+            This page should reward observation rather than brute force. The important detail is the year that ties directly to the North Wing research trail.
+          </div>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <div class="footer">Saint Aurelius University // Knowledge Demands Sacrifice</div>
+
+  <script>
+    const CORRECT_CODE = "1987";
+    const input = document.getElementById("code");
+    const feedback = document.getElementById("feedback");
+    const unlockBox = document.getElementById("unlockBox");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function normalize(value) {
+      return String(value || "").replace(/\s+/g, "").trim();
+    }
+
+    function verify() {
+      const value = normalize(input.value);
+
+      if (!value) {
+        feedback.textContent = "Enter the key year to continue.";
+        feedback.className = "feedback error";
+        unlockBox.style.display = "none";
+        return;
+      }
+
+      if (value === CORRECT_CODE) {
+        feedback.textContent = "Research trail restored. Dormitory access unlocked.";
+        feedback.className = "feedback success";
+        unlockBox.style.display = "block";
+      } else {
+        feedback.textContent = "Incorrect. The library trail is still incomplete.";
+        feedback.className = "feedback error";
+        unlockBox.style.display = "none";
+      }
+    }
+
+    submitBtn.addEventListener("click", verify);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") verify();
+    });
+  </script>
+
+  <!-- Hidden clue for facilitators: the key year is 1987. -->
 </body>
 </html>
