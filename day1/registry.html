@@ -1,1 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saint Aurelius University — Archive Registry</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171b22;
+      --panel-2: #12161c;
+      --text: #e9edf3;
+      --muted: #98a2b3;
+      --line: rgba(255,255,255,0.12);
+      --accent: #c8a96a;
+      --accent-2: #7f8cff;
+      --danger: #ff6b6b;
+      --success: #7ad58b;
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+      --radius: 22px;
+    }
 
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(200,169,106,0.10), transparent 28%),
+        linear-gradient(180deg, #0b0d12 0%, #10131a 55%, #0b0d12 100%);
+      color: var(--text);
+      padding: 28px;
+    }
+
+    .shell {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.25fr 0.85fr;
+      gap: 22px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 26px 28px 20px;
+      background:
+        linear-gradient(180deg, rgba(200,169,106,0.08), transparent 60%),
+        rgba(255,255,255,0.02);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      margin: 10px 0 0;
+      color: var(--muted);
+      max-width: 65ch;
+      line-height: 1.65;
+    }
+
+    .status-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.88rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+      padding: 22px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 520px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.95rem;
+    }
+
+    th {
+      color: #d8dde6;
+      font-weight: 600;
+      background: rgba(255,255,255,0.03);
+    }
+
+    td.muted { color: var(--muted); }
+    .redacted {
+      letter-spacing: 0.18em;
+      color: rgba(233,237,243,0.5);
+    }
+
+    .form {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: #cfd6e1;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(10,12,16,0.8);
+      color: var(--text);
+      outline: none;
+      font-size: 1rem;
+    }
+
+    input[type="text"]:focus {
+      border-color: rgba(127,140,255,0.55);
+      box-shadow: 0 0 0 4px rgba(127,140,255,0.12);
+    }
+
+    button, .button-link {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button:hover, .button-link:hover { transform: translateY(-1px); }
+    button:active, .button-link:active { transform: translateY(0); }
+
+    .primary {
+      background: linear-gradient(180deg, #d6bb7e, #b8944d);
+      color: #141414;
+    }
+
+    .secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .feedback {
+      min-height: 24px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .feedback.error { color: var(--danger); }
+    .feedback.success { color: var(--success); }
+
+    .locked-note {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px dashed rgba(200,169,106,0.35);
+      background: rgba(200,169,106,0.07);
+      color: #eadbb6;
+      line-height: 1.65;
+    }
+
+    .unlock {
+      display: none;
+      margin-top: 12px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(122,213,139,0.35);
+      background: rgba(122,213,139,0.08);
+    }
+
+    .unlock strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--success);
+      letter-spacing: 0.02em;
+    }
+
+    .footer {
+      margin-top: 16px;
+      color: rgba(233,237,243,0.35);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .aside {
+      display: grid;
+      gap: 22px;
+      align-content: start;
+    }
+
+    .monitor {
+      min-height: 240px;
+      display: grid;
+      align-content: space-between;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #d5dbea;
+    }
+
+    .scanline {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scanline::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+      animation: scan 6s linear infinite;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes scan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
+    .tiny {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hint-box {
+      border-left: 3px solid rgba(200,169,106,0.75);
+      padding-left: 12px;
+    }
+
+    @media (max-width: 960px) {
+      .shell { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 16px; }
+      .header, .grid { padding: 18px; }
+      .input-row { grid-template-columns: 1fr; }
+      button, .button-link { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <p class="eyebrow">Saint Aurelius University // Restricted Access</p>
+        <h1>Digital Archive Registry</h1>
+        <p class="subtitle">
+          Unauthorized access detected. A search request has returned records flagged for deletion.
+          One student file is missing from the registry. Reconstruct the record to continue.
+        </p>
+        <div class="status-bar">
+          <span class="pill">Case File: Day 1</span>
+          <span class="pill">Objective: Prove Elias Voss existed</span>
+          <span class="pill">Status: Archive Integrity Compromised</span>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="panel">
+          <h2>Registry Snapshot</h2>
+          <p>Current entries recovered from the database mirror.</p>
+          <div class="table-wrap" style="margin-top: 14px;">
+            <table aria-label="Student registry snapshot">
+              <thead>
+                <tr>
+                  <th style="width: 28%;">Student ID</th>
+                  <th>Name</th>
+                  <th style="width: 24%;">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>87121</td>
+                  <td>Thomas Gray</td>
+                  <td>Confirmed</td>
+                </tr>
+                <tr>
+                  <td>87122</td>
+                  <td>Maria Cruz</td>
+                  <td>Confirmed</td>
+                </tr>
+                <tr>
+                  <td class="redacted">█████</td>
+                  <td class="redacted">████████████</td>
+                  <td class="redacted">██████</td>
+                </tr>
+                <tr>
+                  <td>87124</td>
+                  <td>Elena Hart</td>
+                  <td>Confirmed</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Recovery Prompt</h2>
+          <p>
+            IDs were assigned sequentially. One slot was intentionally obscured before the backup was exported.
+            Restore the missing student ID.
+          </p>
+
+          <div class="form" style="margin-top: 16px;">
+            <label for="code">Enter the missing student ID</label>
+            <div class="input-row">
+              <input id="code" type="text" inputmode="numeric" autocomplete="off" placeholder="Enter code" aria-describedby="feedback" />
+              <button class="primary" id="submitBtn" type="button">Verify</button>
+            </div>
+            <div class="feedback" id="feedback" aria-live="polite"></div>
+
+            <div class="unlock" id="unlockBox">
+              <strong>Access granted.</strong>
+              <div class="tiny" style="margin-bottom: 12px;">
+                The registry file is now unlocked. Proceed to the next archive page.
+              </div>
+              <a class="button-link secondary" href="yearbook.html">Open Yearbook Access</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Archive Notice</h2>
+          <div class="locked-note">
+            <strong style="display:block; margin-bottom: 6px; color: var(--accent);">SYSTEM MESSAGE</strong>
+            Do not trust any record that appears fully intact. The archive has been edited by hand.
+            Missing entries are usually the most important ones.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="aside">
+      <section class="card monitor scanline">
+        <div class="header">
+          <p class="eyebrow">Archive Terminal</p>
+          <h1 style="font-size: 1.5rem;">Live Recovery Console</h1>
+        </div>
+        <div class="grid mono">
+          <div>&gt; loading student mirror...</div>
+          <div>&gt; file checksum: partial</div>
+          <div>&gt; deleted slot detected at sequence: 87123</div>
+          <div>&gt; access level: limited</div>
+          <div>&gt; next archive: yearbook index</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="header">
+          <p class="eyebrow">Design Note</p>
+          <h1 style="font-size: 1.35rem;">Puzzle Intent</h1>
+        </div>
+        <div class="grid">
+          <div class="tiny hint-box">
+            This page teaches the players the core language of the game: surveillance, redaction, and recovery.
+            It should feel simple enough to solve quickly, but creepy enough to set the tone for Day 1.
+          </div>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <div class="footer">Saint Aurelius University // Knowledge Demands Sacrifice</div>
+
+  <script>
+    const CORRECT_CODE = "87123";
+    const input = document.getElementById("code");
+    const feedback = document.getElementById("feedback");
+    const unlockBox = document.getElementById("unlockBox");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function normalize(value) {
+      return String(value || "").replace(/\s+/g, "").trim();
+    }
+
+    function verify() {
+      const value = normalize(input.value);
+
+      if (!value) {
+        feedback.textContent = "Enter a student ID to continue.";
+        feedback.className = "feedback error";
+        unlockBox.style.display = "none";
+        return;
+      }
+
+      if (value === CORRECT_CODE) {
+        feedback.textContent = "Registry restored. Yearbook access unlocked.";
+        feedback.className = "feedback success";
+        unlockBox.style.display = "block";
+      } else {
+        feedback.textContent = "Incorrect. The registry remains sealed.";
+        feedback.className = "feedback error";
+        unlockBox.style.display = "none";
+      }
+    }
+
+    submitBtn.addEventListener("click", verify);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") verify();
+    });
+  </script>
+
+  <!-- Hidden clue for facilitators: the missing ID is 87123. -->
+</body>
+</html>
