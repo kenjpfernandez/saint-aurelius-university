@@ -1,1 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saint Aurelius University — Yearbook Archive</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171b22;
+      --panel-2: #12161c;
+      --text: #e9edf3;
+      --muted: #98a2b3;
+      --line: rgba(255,255,255,0.12);
+      --accent: #c8a96a;
+      --accent-2: #7f8cff;
+      --danger: #ff6b6b;
+      --success: #7ad58b;
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+      --radius: 22px;
+    }
 
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(200,169,106,0.10), transparent 28%),
+        linear-gradient(180deg, #0b0d12 0%, #10131a 55%, #0b0d12 100%);
+      color: var(--text);
+      padding: 28px;
+    }
+
+    .shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 26px 28px 20px;
+      background:
+        linear-gradient(180deg, rgba(200,169,106,0.08), transparent 60%),
+        rgba(255,255,255,0.02);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      margin: 10px 0 0;
+      color: var(--muted);
+      max-width: 70ch;
+      line-height: 1.65;
+    }
+
+    .status-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.88rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+      padding: 22px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+
+    .panel p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+    .yearbook-view {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .photo-card {
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)),
+        radial-gradient(circle at top, rgba(127,140,255,0.15), transparent 55%);
+      min-height: 340px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-frame {
+      height: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background:
+        linear-gradient(180deg, rgba(15,17,21,0.20), rgba(15,17,21,0.55)),
+        url('assets/images/yearbook-placeholder.jpg') center/cover no-repeat;
+      display: grid;
+      align-content: end;
+      padding: 16px;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .photo-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        180deg,
+        rgba(255,255,255,0.02) 0,
+        rgba(255,255,255,0.02) 2px,
+        transparent 2px,
+        transparent 6px
+      );
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.55;
+    }
+
+    .caption {
+      position: relative;
+      z-index: 1;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 12px 14px;
+      border-radius: 12px;
+    }
+
+    .caption strong { display: block; margin-bottom: 4px; }
+    .caption span { color: var(--muted); font-size: 0.92rem; }
+
+    .ripped-slot {
+      border-radius: 18px;
+      border: 1px dashed rgba(200,169,106,0.35);
+      background: rgba(200,169,106,0.06);
+      min-height: 340px;
+      padding: 16px;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      text-align: center;
+      gap: 14px;
+    }
+
+    .ripped-slot .tear {
+      width: 70%;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(233,237,243,0.22), transparent);
+      opacity: 0.8;
+    }
+
+    .ripped-slot .missing {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: 0.28em;
+      color: rgba(233,237,243,0.45);
+      font-size: 0.95rem;
+    }
+
+    .form {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: #cfd6e1;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(10,12,16,0.8);
+      color: var(--text);
+      outline: none;
+      font-size: 1rem;
+    }
+
+    input[type="text"]:focus {
+      border-color: rgba(127,140,255,0.55);
+      box-shadow: 0 0 0 4px rgba(127,140,255,0.12);
+    }
+
+    button, .button-link {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button:hover, .button-link:hover { transform: translateY(-1px); }
+    button:active, .button-link:active { transform: translateY(0); }
+
+    .primary {
+      background: linear-gradient(180deg, #d6bb7e, #b8944d);
+      color: #141414;
+    }
+
+    .secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .feedback {
+      min-height: 24px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .feedback.error { color: var(--danger); }
+    .feedback.success { color: var(--success); }
+
+    .unlock {
+      display: none;
+      margin-top: 12px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(122,213,139,0.35);
+      background: rgba(122,213,139,0.08);
+    }
+
+    .unlock strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--success);
+      letter-spacing: 0.02em;
+    }
+
+    .locked-note {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px dashed rgba(200,169,106,0.35);
+      background: rgba(200,169,106,0.07);
+      color: #eadbb6;
+      line-height: 1.65;
+    }
+
+    .footer {
+      margin-top: 16px;
+      color: rgba(233,237,243,0.35);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .aside {
+      display: grid;
+      gap: 22px;
+      align-content: start;
+    }
+
+    .monitor {
+      min-height: 260px;
+      display: grid;
+      align-content: space-between;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #d5dbea;
+    }
+
+    .scanline {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scanline::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+      animation: scan 6s linear infinite;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes scan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
+    .tiny {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hint-box {
+      border-left: 3px solid rgba(200,169,106,0.75);
+      padding-left: 12px;
+    }
+
+    @media (max-width: 1024px) {
+      .shell { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 16px; }
+      .header, .grid { padding: 18px; }
+      .yearbook-view { grid-template-columns: 1fr; }
+      .input-row { grid-template-columns: 1fr; }
+      button, .button-link { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <div class="header">
+        <p class="eyebrow">Saint Aurelius University // Restricted Access</p>
+        <h1>Yearbook Archive</h1>
+        <p class="subtitle">
+          A digitized yearbook has been recovered from the archive. One page has been torn out,
+          and the remaining image contains only a partial caption. Locate the page number to continue.
+        </p>
+        <div class="status-bar">
+          <span class="pill">Case File: Day 1</span>
+          <span class="pill">Objective: Identify the missing yearbook page</span>
+          <span class="pill">Status: Visual Record Tampered</span>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="panel">
+          <h2>Recovered Spread</h2>
+          <p>Two adjoining yearbook panels were extracted from the archive mirror.</p>
+
+          <div class="yearbook-view" style="margin-top: 14px;">
+            <div class="photo-card">
+              <div class="photo-frame">
+                <div class="caption">
+                  <strong>Class of 1987</strong>
+                  <span>“Most Likely to Change the Future”</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ripped-slot">
+              <div class="tear"></div>
+              <div class="missing">MISSING IMAGE SLOT</div>
+              <div class="tiny" style="max-width: 30ch;">
+                The archive has preserved the caption line, but the portrait itself was intentionally removed.
+              </div>
+              <div class="tear"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Recovery Prompt</h2>
+          <p>
+            The archive note references the original page number. Use the hidden marker in the recovered spread
+            to restore the missing yearbook page.
+          </p>
+
+          <div class="form" style="margin-top: 16px;">
+            <label for="code">Enter the missing page number</label>
+            <div class="input-row">
+              <input id="code" type="text" inputmode="numeric" autocomplete="off" placeholder="Enter page number" aria-describedby="feedback" />
+              <button class="primary" id="submitBtn" type="button">Verify</button>
+            </div>
+            <div class="feedback" id="feedback" aria-live="polite"></div>
+
+            <div class="unlock" id="unlockBox">
+              <strong>Access granted.</strong>
+              <div class="tiny" style="margin-bottom: 12px;">
+                Yearbook page restored. The library archive is now available.
+              </div>
+              <a class="button-link secondary" href="library.html">Open Library Records</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Archive Notice</h2>
+          <div class="locked-note">
+            <strong style="display:block; margin-bottom: 6px; color: var(--accent);">SYSTEM MESSAGE</strong>
+            A student can be deleted from a registry, but a torn photograph often leaves a trace.
+            Search for the page number where the image was removed.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="aside">
+      <section class="card monitor scanline">
+        <div class="header">
+          <p class="eyebrow">Archive Terminal</p>
+          <h1 style="font-size: 1.5rem;">Visual Recovery Console</h1>
+        </div>
+        <div class="grid mono">
+          <div>&gt; loading yearbook scan...</div>
+          <div>&gt; page integrity: partial</div>
+          <div>&gt; photo slot missing</div>
+          <div>&gt; hidden marker located near caption line</div>
+          <div>&gt; next archive: library check-outs</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="header">
+          <p class="eyebrow">Design Note</p>
+          <h1 style="font-size: 1.35rem;">Puzzle Intent</h1>
+        </div>
+        <div class="grid">
+          <div class="tiny hint-box">
+            This page should feel like a visual search puzzle, not a math puzzle. The key clue is the page reference,
+            which should be discoverable by inspecting the yearbook scan, captions, or a tiny side note.
+          </div>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <div class="footer">Saint Aurelius University // Knowledge Demands Sacrifice</div>
+
+  <script>
+    const CORRECT_CODE = "47";
+    const input = document.getElementById("code");
+    const feedback = document.getElementById("feedback");
+    const unlockBox = document.getElementById("unlockBox");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function normalize(value) {
+      return String(value || "").replace(/\s+/g, "").trim();
+    }
+
+    function verify() {
+      const value = normalize(input.value);
+
+      if (!value) {
+        feedback.textContent = "Enter the page number to continue.";
+        feedback.className = "feedback error";
+        unlockBox.style.display = "none";
+        return;
+      }
+
+      if (value === CORRECT_CODE) {
+        feedback.textContent = "Yearbook restored. Library access unlocked.";
+        feedback.className = "feedback success";
+        unlockBox.style.display = "block";
+      } else {
+        feedback.textContent = "Incorrect. The yearbook remains incomplete.";
+        feedback.className = "feedback error";
+        unlockBox.style.display = "none";
+      }
+    }
+
+    submitBtn.addEventListener("click", verify);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") verify();
+    });
+  </script>
+
+  <!-- Hidden clue for facilitators: the missing page is 47. -->
+</body>
+</html>
